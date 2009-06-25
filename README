@@ -1,0 +1,8 @@
+This is a mirror of http://www.vim.org/scripts/script.php?script_id=2689
+
+A cold colorscheme for GVIM/VIM without bold, italic nor
+underline font styles (except for spell checking and some 
+GUI elements). On VIM it uses a black background, because 
+it was easier to do and *seems* to be the only way to make 
+a colorscheme look nice on any darn terminal.
+This colorscheme _should_ look nice everywhere.
