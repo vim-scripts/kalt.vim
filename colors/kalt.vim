@@ -3,30 +3,54 @@
 "     License: Public Domain, FREE as LOVE.                                    |
 " Description: A cold colorscheme for GVIM/VIM without bold, italic nor        |
 "              underline font styles (except for spell checking and some GUI   |
-"              elements). On VIM it uses a black background, because it was    |
-"              easier to do and *seems* to be the only way to make a           |
-"              colorscheme look nice on any darn terminal.                     |
-"              This colorscheme _should_ look nice everywhere.                 |
+"              elements). On VIM it uses a black background.                   |
+"        Note: - Only standard (for all languages) highlight-groups are set.   |
+"              - This colorscheme _should_ look nice everywhere.               |
 "==============================================================================|
-"      Author: drachenkiraa, {ZdrachenZkiraaZ}@{ZgmailZ}.{comZ}  (remove: Z{}) |
-" Last Change: 2009 Jun 25                                                     |
-"     Version: 1.0                                                             |
+"      Author: drachenkiraa, {_drachen_kiraa_}@{_gmail_}.{com_}  (remove: _{}) |
+" Last Change: 2009 Jul 1                                                      |
+"     Version: 1.1                                                             |
 "==========================================================================={{{1
+" Thanks:                                                                      |
+" Starwing Wesley, for telling me that the Cursor disappeared when moving it   |
+"   on a  Comment (in gnome-terminal).                                         |
+" Changes:                                                                     |
+"  1.0: Public release.                                                        |
+"  1.1: FIX: Cursor disappeared when moving it in a Comment. This ONLY         |
+"         happened on one terminal (gnome-terminal). Now the Comment ctermfg   |
+"         color is DarkGreen for all 8 color Xterms. But you'll still get the  |
+"         original color (DarkGray) if your terminal supports more colors      |
+"         (or if you set 't_Co' [look below in "Random Tips"]).                |
+"       Changed 'Cursor', 'CursorLine', 'CursorColumn' colors to DarkBlue      |
+"         instead of the ugly Green.                                           |
+"       Changed 'SpellRare' guifg color from Magenta to DarkMagenta.           |
+"       Changed 'IncSearch' guifg color from LighMagenta to Green.             |
+"       Changed 'PreCondit' guifg color to a Darker Yellow color.              |
+"       Changed 'Special' guifg color from Blue to a Dark Red color.           |
+"       Set ctermfg and guifg options of 'Search' and 'IncSearch' to the       |
+"         background color.                                                    |
+"       Made 'Character' guifg color more brighter.                            |
+"       Changed 'Special' guifg color from Blue to a nice Red color.           |
+"==============================================================================|
 "  Color Test: :he group-name                                                  |
 "              :so $VIMRUNTIME/syntax/hitest.vim                               |
-"   Tested On: - Windows (gvim v7.1), Linux (gvim v6.3),                       |
-"              - DOS (vim v7.1), Standard Linux Terminal (gvim v6.3, v6.4),    |
-"              - Xterm, Rxvt, Konsole (vim v6.3, v6.4).                        |
+"   Tested On: - Linux (gvim v6.3, v6.4);                                      |
+"              - Standard Linux Terminal (vim v6.3, v6.4);                     |
+"              - Xterm, Rxvt, Konsole, gnome-terminal (vim v6.3, v6.4).        |
+"              - Windows (gvim v7.1, v7.2);                                    |
+"              - DOS (vim v7.1, v7.2).                                         |
 "        TODO: * Test this colorscheme on newer versions of vim/gvim for Linux |
-"                and other systems.                                            |
+"                and other systems (*BSD, Mac, Amiga?).                        |
 "              * Are all the has("feature") checks really worth?               |
 "                Please enlighten me if I'm wrong.                             |
 "==============================================================================|
 " Random Tips:                                                                 |
 " * If your terminal supports more than 8 colors (which is the case of most    |
-"   xterms, rxvts, and others), then it is worth adding the following line     |
-"   somewhere into your .vimrc:                                                |
-"       set t_Co=16                                                            |
+"   modern xterms, rxvts, and others), then it is worth adding the following   |
+"   lines somewhere into your .vimrc:                                          |
+"       if &term =~ "xterm"                                                    |
+"         set t_Co=16                                                          |
+"       endif                                                                  |
 "   That'll make this colorscheme look a lot better on such terminals.         |
 "   For further help checkout:                                                 |
 "       :he term-dependent-settings                                            |
@@ -49,9 +73,9 @@ hi Normal ctermbg=Black ctermfg=Gray cterm=NONE guibg=#eaeaea guifg=Black gui=no
 " Vim >= 7.0 specific colors {{{1
 if v:version >= 700
   " Cursor colors {{{2
-  hi Cursor ctermbg=DarkBlue ctermfg=fg cterm=NONE guibg=DarkBlue guifg=bg gui=none
-  hi CursorLine ctermbg=Green guibg=#ccccff gui=none
-  hi CursorColumn ctermbg=Green guibg=#ccccff gui=none
+  hi Cursor ctermbg=DarkBlue ctermfg=fg guibg=DarkBlue guifg=bg gui=none
+  hi CursorLine ctermbg=DarkBlue guibg=#ccccff gui=none
+  hi CursorColumn ctermbg=DarkBlue guibg=#ccccff gui=none
   " only for Win32, IME status
   if has('multi_byte_ime')
     hi CursorIM guibg=DarkMagenta guifg=NONE gui=none
@@ -75,7 +99,7 @@ if v:version >= 700
     hi SpellBad ctermbg=White ctermfg=Red cterm=NONE guisp=Red gui=undercurl
     hi SpellCap ctermbg=White ctermfg=Blue cterm=NONE guisp=Blue gui=undercurl
     hi SpellLocal ctermbg=White ctermfg=DarkCyan cterm=NONE guisp=DarkCyan gui=undercurl
-    hi SpellRare ctermbg=White ctermfg=Magenta cterm=NONE guisp=Magenta gui=undercurl
+    hi SpellRare ctermbg=White ctermfg=DarkMagenta cterm=NONE guisp=Magenta gui=undercurl
   endif
 
 endif "}}}1
@@ -108,8 +132,8 @@ endif
 
 " Search & Special characters' colors {{{1
 if has("extra_search")
-  hi Search ctermbg=Yellow cterm=NONE guibg=Yellow gui=none
-  hi IncSearch ctermbg=Green ctermfg=bg cterm=NONE guibg=LightMagenta guifg=fg gui=none
+  hi Search ctermbg=Yellow ctermfg=bg cterm=NONE guibg=Yellow guifg=fg gui=none
+  hi IncSearch ctermbg=Green ctermfg=bg cterm=NONE guibg=Green guifg=fg gui=none
 endif
 hi NonText ctermbg=bg ctermfg=DarkGray guibg=bg guifg=DarkGray gui=none
 hi SpecialKey ctermbg=bg ctermfg=Brown guibg=bg guifg=#993333 gui=none
@@ -135,9 +159,16 @@ endif
 
 " Syntax highlighting colors {{{1
 hi Comment ctermbg=bg ctermfg=DarkGray guibg=bg guifg=Gray50 gui=none
+" 8 color terminals fix:
+"   The Cursor disappears when moving it in a Comment. Only happened on
+"   one terminal: gnome-terminal. This Fixes-it for all other weird
+"   8 color terminals.
+if (&term =~ "xterm") && (&t_Co < 16)
+  hi Comment ctermfg=DarkGreen
+endif
 hi link SpecialComment Comment
 
-hi Character ctermbg=bg ctermfg=Red guibg=bg guifg=DarkRed gui=none
+hi Character ctermbg=bg ctermfg=Red guibg=bg guifg=#990000 gui=none
 hi String ctermbg=bg ctermfg=Magenta guibg=bg guifg=Blue gui=none
 hi Constant ctermbg=bg ctermfg=Yellow guibg=bg guifg=DarkGreen gui=none
 hi link Number Constant
@@ -161,11 +192,11 @@ hi link Structure Type
 hi link Typedef Type
 
 hi PreProc ctermbg=bg ctermfg=DarkCyan guibg=bg guifg=DarkCyan gui=none
-hi PreCondit ctermbg=bg ctermfg=DarkYellow guibg=bg guifg=DarkYellow gui=none
+hi PreCondit ctermbg=bg ctermfg=DarkYellow guibg=bg guifg=#aa8800 gui=none
 hi link Include PreProc
 hi link Define PreProc
 
-hi Special ctermbg=bg ctermfg=Blue guibg=bg guifg=Blue gui=none
+hi Special ctermbg=bg ctermfg=Blue guibg=bg guifg=#990000 gui=none
 hi SpecialChar ctermbg=bg ctermfg=Red guibg=bg guifg=Red gui=none
 hi Tag ctermbg=bg ctermfg=DarkRed guibg=bg guifg=DarkRed gui=none
 hi Delimiter ctermbg=bg ctermfg=DarkRed guibg=bg guifg=DarkRed gui=none
@@ -178,5 +209,5 @@ hi Todo ctermbg=DarkCyan ctermfg=bg cterm=NONE guibg=DarkCyan guifg=bg gui=none
 hi Underlined ctermbg=bg ctermfg=Blue cterm=underline guibg=bg guifg=Blue gui=underline
 "}}}1
 "==========================================================================={{{1
-" vim: set et sw=2 sts=2 ts=8:
+" vim: set et sw=2 sts=2 ts=8 nowrap:
 " vim600: set fdc=2 fdm=marker:
